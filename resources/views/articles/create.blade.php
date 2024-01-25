@@ -24,20 +24,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="tags" class="form-label">Tags</label>
-                <select class="form-select" multiple aria-label="Tags" name="tags[]">
-                    @foreach ($tags as $tag)
-                        <option value="{{$tag->id}}">{{$tag->name}}</option>
-                    @endforeach
-                </select>
-                @error('tags')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                 @error('image')

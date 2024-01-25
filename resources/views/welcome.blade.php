@@ -19,11 +19,6 @@
                       <p class="text-body-secondary">
                         <b>Comments: </b> {{$article->comments()->count()}}
                       </p>
-                      <p>
-                        @foreach ($article->tags as $tag)
-                                <a href="{{route('tag', ['tag' => $tag])}}" class="badge rounded-pill text-bg-primary">{{$tag->name}}</a>
-                        @endforeach
-                      </p>
                       <a href="{{route('article', ['article' => $article])}}" class="btn btn-primary">Read more!</a>
                     </div>
                 </div>
