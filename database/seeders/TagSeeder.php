@@ -3,22 +3,24 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ArticleSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $users = User::all();
-        $articles = Article::factory(100)->make();
+        $tags = Tag::factory(10)->create();
+        $articles = Article::all();
         foreach($articles as $article){
-            $article->user_id = $users->random()->id;
-            $article->save();
+            $randomTags = $tags->random(rand(0, 10));
+            foreach($randomTags as $tag){
+                $article->tags()->attach($tag);
+            }
         }
     }
 }

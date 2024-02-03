@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -37,5 +38,10 @@ class PublicController extends Controller
         $comment->article()->associate($article);
         $comment->save();
         return redirect()->back();
+    }
+
+    public function tag(Tag $tag){
+        $articles = $tag->articles()->latest()->paginate(16);
+        return view('welcome', compact('articles'));
     }
 }

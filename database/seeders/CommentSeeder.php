@@ -3,22 +3,27 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ArticleSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        $articles = Article::all();
         $users = User::all();
-        $articles = Article::factory(100)->make();
         foreach($articles as $article){
-            $article->user_id = $users->random()->id;
-            $article->save();
+
+            $comments = Comment::factory(rand(5,10))->make(['article_id' => $article->id]);
+            foreach($comments as $comment){
+                $comment->user_id = $users->random()->id;
+                $comment->save();
+            }
         }
     }
 }
